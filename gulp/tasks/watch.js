@@ -37,7 +37,7 @@ gulp.task('watch', function () {
     );
 
     gulp.watch(
-        [config.src.img + '/**/*.img'],
+        [config.src.img + '/**'],
         gulp.series(['img', 'reload']),
     );
 });
@@ -66,7 +66,7 @@ gulp.task('watch:wp', function () {
     );
 
     gulp.watch(
-        [config.src.img + '/**/*.img'],
+        [config.src.img + '/**'],
         gulp.series(['img:wp', 'reload']),
     );
 });
