@@ -1,0 +1,22 @@
+name: test build:wp
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pr-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: gulp build
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.17.4'
+      - name: init config
+        run: cp gulp/config-example.js gulp/config.js
+      - name: install
+        run: npm install
+      - name: build
+        run: npm run build:wp
