@@ -1,0 +1,29 @@
+name: deploy to staging server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  stg-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: gulp build
+        uses: actions/setup-node@v2
+        with:
+          node-version: '13.10.1'
+      - name: init config
+        run: cp gulp/config-example.js gulp/config.js
+      - run: npm install
+      - name: set ssh key
+        run: echo "$SSH_PRIVATE_KEY" > ${SSH_KEY_PATH} && chmod 600 ${SSH_KEY_PATH}
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KEY_PATH: id_rsa
+      - name: rsync deploy
+        run: rsync -auzrv -e "ssh -i ${SSH_KEY_PATH} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" --delete ./dist/* ${REMOTE_DIR} --exclude .htaccess
+        env:
+          REMOTE_DIR: me@example.com:/home/me/github_actions_dir/
+          SSH_KEY_PATH: id_rsa
