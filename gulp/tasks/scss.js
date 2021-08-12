@@ -6,6 +6,7 @@ const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
 const replace = require('gulp-replace');
 const sass = require('gulp-sass');
+const sassGlob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
 
 const config = require('../config');
@@ -16,6 +17,7 @@ gulp.task('scss', function () {
         .pipe(replace(/url\((\.\.\/)+(.*?)\)/g, 'url(./$2)')) // background-image, font などのプロパティの相対パス修正
         .pipe(sourcemaps.init())
         .pipe(plumber(notify.onError('Error: \n<%= error.message %>')))
+        .pipe(sassGlob())
         .pipe(sass({ outputStyle: 'expanded' }))
         .pipe(postcss([
             autoprefixer(),
@@ -29,6 +31,7 @@ gulp.task('scss:wp', function () {
         .pipe(replace(/url\((\.\.\/)+(.*?)\)/g, 'url(./$2)'))
         .pipe(sourcemaps.init())
         .pipe(plumber(notify.onError('Error: \n<%= error.message %>')))
+        .pipe(sassGlob())
         .pipe(sass({ outputStyle: 'compressed' }))
         .pipe(postcss([
             autoprefixer(),
