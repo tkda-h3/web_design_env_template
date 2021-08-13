@@ -25,12 +25,14 @@ gulp.task('scss', function () {
             isProd, 
             sass({ outputStyle: 'compressed' }),
             sass({ outputStyle: 'expanded' })))
+        .pipe(replace(/url\((\.\.\/)+(.*?)\)/g, 'url(../$2)'))
         .pipe(postcss([
             autoprefixer(),
             cssdeclsort({ order: 'smacss' }),
         ]))
         .pipe(gulpif(!isProd, sourcemaps.write()))
-        .pipe(gulp.dest(config.static.dist + '/'))
+        .pipe(gulp.dest(config.static.dist + '/css'))
+    ;
 });
 
 gulp.task('scss:wp', function () {
@@ -43,10 +45,12 @@ gulp.task('scss:wp', function () {
             isProd, 
             sass({ outputStyle: 'compressed' }),
             sass({ outputStyle: 'expanded' })))
+        .pipe(replace(/url\((\.\.\/)+(.*?)\)/g, 'url(../$2)'))
         .pipe(postcss([
             autoprefixer(),
             cssdeclsort({ order: 'smacss' }),
         ]))
-        .pipe(gulpif(!isProd, sourcemaps.write()))
-        .pipe(gulp.dest(config.wp.dist + '/'))
+        .pipe(gulpif(!isProd, sourcemaps.write()))        
+        .pipe(gulp.dest(config.wp.dist + '/css'))
+    ;
 });

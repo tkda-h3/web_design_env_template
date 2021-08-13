@@ -1,0 +1,27 @@
+.content {
+  display: flex;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+  background-color: rgb(218, 244, 184);
+}
+
+.sidebar {
+  min-width: 200px;
+  padding: 20px;
+  background: #f5e5d5;
+
+  &-list {
+    list-style: none;
+
+    &__item {
+      padding: 5px 10px;
+      margin-top: 20px;
+      border-bottom: 1px solid #e9689c;
+    }
+  }
+}

@@ -4,22 +4,14 @@
     "description": "デザインカンプからWordpressテーマ化までの環境構築テンプレート",
     "main": "index.js",
     "scripts": {
-        "scss": "gulp scss",
-        "ejs": "gulp ejs",
-        "js": "gulp js",
         "php:init": "gulp ejs:php:init",
-        "php": "gulp php",
-        "font": "gulp font",
-        "img": "gulp img",
-        "clean:static": "gulp clean:static",
-        "clean:wp": "gulp clean:wp",
         "watch:static": "gulp watch",
         "watch:wp": "gulp watch:wp",
         "build:static": "gulp clean:static && gulp scss && gulp js && gulp font && gulp img && gulp ejs",
         "build:static:prod": "gulp clean:static && gulp scss --env prod && gulp js --env prod && gulp font && gulp img && gulp ejs",
-        "init:wp": "gulp clean:wp && gulp scss:wp && gulp js:wp && gulp font:wp && gulp img:wp && gulp ejs:php:init && gulp php",
-        "build:wp": "gulp clean:wp && gulp scss:wp && gulp js:wp && gulp font:wp && gulp img:wp && gulp php",
-        "build:wp:prod": "gulp clean:wp && gulp scss:wp --env prod && gulp js:wp --env prod && gulp font:wp && gulp img:wp && gulp php"
+        "init:wp": "gulp clean:wp && gulp css:wp:declare && gulp scss:wp && gulp js:wp && gulp font:wp && gulp img:wp && gulp ejs:php:init && gulp php",
+        "build:wp": "gulp clean:wp && gulp css:wp:declare && gulp scss:wp && gulp js:wp && gulp font:wp && gulp img:wp && gulp php",
+        "build:wp:prod": "gulp clean:wp && gulp css:wp:declare && gulp scss:wp --env prod && gulp js:wp --env prod && gulp font:wp && gulp img:wp && gulp php"
     },
     "repository": {
         "type": "git",
