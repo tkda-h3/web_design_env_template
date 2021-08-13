@@ -1,0 +1,11 @@
+.rainbow {
+  margin-top: 60px;
+  background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet, red);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
