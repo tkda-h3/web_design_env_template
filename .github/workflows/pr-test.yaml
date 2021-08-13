@@ -1,4 +1,4 @@
-name: test build:wp
+name: test
 
 on:
   pull_request:
@@ -19,4 +19,4 @@ jobs:
       - name: install
         run: npm install
       - name: build
-        run: npm run build:wp
+        run: npm run build:wp:prod

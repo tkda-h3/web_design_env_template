@@ -2,6 +2,7 @@ const autoprefixer = require('autoprefixer');
 const cssdeclsort = require('css-declaration-sorter');
 const del = require('del');
 const gulp = require('gulp');
+const gulpif = require('gulp-if');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
@@ -11,12 +12,15 @@ const sassGlob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
 
 const config = require('../config');
+const options = require('minimist')(process.argv.slice(2), {string: 'env'});
+const isProd = (options.env === 'prod');
 
 
 gulp.task('scss', function () {
     return gulp.src(config.src.scss + '/**/*.scss')
         .pipe(gulpif(!isProd, sourcemaps.init()))
         .pipe(plumber(notify.onError('Error: \n<%= error.message %>')))
+        .pipe(replace(/url\((\.\.\/)+(.*?)\)/g, 'url(./$2)')) // background-image, font などのプロパティの相対パス修正
         .pipe(sassGlob())
         .pipe(gulpif(
             isProd, 
@@ -36,6 +40,7 @@ gulp.task('scss:wp', function () {
     return gulp.src(config.src.scss + '/**/*.scss')
         .pipe(gulpif(!isProd, sourcemaps.init()))
         .pipe(plumber(notify.onError('Error: \n<%= error.message %>')))
+        .pipe(replace(/url\((\.\.\/)+(.*?)\)/g, 'url(./$2)'))
         .pipe(sassGlob())
         .pipe(gulpif(
             isProd, 
@@ -50,4 +55,3 @@ gulp.task('scss:wp', function () {
         .pipe(gulp.dest(config.wp.dist + '/css'))
     ;
 });
-
