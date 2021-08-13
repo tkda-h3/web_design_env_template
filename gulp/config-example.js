@@ -1,6 +1,7 @@
 module.exports = {
     src: {
         scss: './src/scss',
+        css: './src/scss',
         ejs: './src/ejs',
         js: './src/js',
         font: './src/font',

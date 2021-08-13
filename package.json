@@ -25,7 +25,6 @@
         "css-declaration-sorter": "^6.1.1",
         "del": "^6.0.0",
         "gulp": "^4.0.2",
-        "gulp-append-prepend": "^1.0.9",
         "gulp-changed": "^4.0.3",
         "gulp-ejs": "^5.1.0",
         "gulp-if": "^3.0.0",

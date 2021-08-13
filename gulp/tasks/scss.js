@@ -1,6 +1,5 @@
 const autoprefixer = require('autoprefixer');
 const cssdeclsort = require('css-declaration-sorter');
-const del = require('del');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const notify = require('gulp-notify');
