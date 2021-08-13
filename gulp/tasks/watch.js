@@ -56,6 +56,11 @@ gulp.task('watch:wp', function () {
     );
 
     gulp.watch(
+        [config.src.js + '/**/*.js'],
+        gulp.series(['js:wp', 'reload']),
+    );
+
+    gulp.watch(
         [config.src.php + '/**/*.php'],
         gulp.series(['php', 'reload']),
     );
