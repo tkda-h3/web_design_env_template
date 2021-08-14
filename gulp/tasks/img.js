@@ -34,29 +34,33 @@ gulp.task('img', () => {
     );
 });
 
-gulp.task('img:wp', () => {
-    return (
-        gulp.src(config.src.img + '/**')
-            .pipe(imagemin([
-                // pngの圧縮
-                pngquant({
-                    quality: [0.6, 0.8]
-                }),
-                // jpgの圧縮
-                mozjpeg({
-                    quality: 60,
-                    progressive: true
-                }),
-                // gifの圧縮
-                imageminGif({
-                    interlaced: false,
-                    optimizationLevel: 3,
-                    colors: 180
-                }),
-                // SVGの圧縮
-                imageminSvg()
-            ]
-            ))
-            .pipe(gulp.dest(config.wp.dist + '/img/'))
-    );
+gulp.task('img:wp', (done) => {
+    gulp.src([config.src.img + '/**', '!' + config.src.img + '/screenshot.+(jpg|jpeg|png)'])
+        .pipe(imagemin([
+            // pngの圧縮
+            pngquant({
+                quality: [0.6, 0.8]
+            }),
+            // jpgの圧縮
+            mozjpeg({
+                quality: 60,
+                progressive: true
+            }),
+            // gifの圧縮
+            imageminGif({
+                interlaced: false,
+                optimizationLevel: 3,
+                colors: 180
+            }),
+            // SVGの圧縮
+            imageminSvg()
+        ]
+        ))
+        .pipe(gulp.dest(config.wp.dist + '/img/'));
+
+    // テーマ選択画面に表示される画像
+    gulp.src(config.src.img + '/screenshot.+(jpg|jpeg|png)')
+        .pipe(gulp.dest(config.wp.dist + '/'));
+
+    done();
 });
